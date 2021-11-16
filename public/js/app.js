@@ -31,10 +31,15 @@ Vue.createApp({
             formData.append("file", this.file);
             formData.append("title", this.title);
             formData.append("desc", this.desc);
-            fetch("/upload", {
+            formData.append("username", this.username);
+            fetch("/upload.json", {
                 method: "POST",
                 body: formData,
-            });
+            })
+                .then((data) => data.json())
+                .then((data) => {
+                    this.images.unshift(data);
+                });
         },
     },
 }).mount("#main");

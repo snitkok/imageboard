@@ -4,6 +4,8 @@ const db = require("./db.js");
 const multer = require("multer");
 const uidSafe = require("uid-safe");
 const path = require("path");
+const s3 = require("./s3.js"); //added
+const amazonUrl = "https://s3.amazonaws.com/spicedling/";
 
 app.use(express.static("./public"));
 
@@ -27,17 +29,26 @@ const uploader = multer({
     },
 });
 
-app.post("/upload", uploader.single("file"), function (req, res) {
-    if (req.file) {
-        // it worked!
-        console.log("it worked");
-        res.sendStatus(200);
-    } else {
-        // boo
-        console.log("it didn't work");
-        res.sendStatus(500);
+app.post(
+    "/upload.json",
+    uploader.single("file"),
+    s3.upload,
+    function (req, res) {
+        console.log("req.body-------------", req.body);
+        console.log("Post/ upload");
+        const { title, description, username } = req.body;
+        const { filename } = req.file;
+        const url = `${amazonUrl}${filename}`;
+
+        db.uploadImages(url, username, title, description)
+            .then((val) => {
+                res.json(val.rows[0]);
+            })
+            .catch((err) => {
+                console.log("Error in the post /upload  db.uploadImages", err);
+            });
     }
-});
+);
 
 //------------------------------------
 

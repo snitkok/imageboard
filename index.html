@@ -10,23 +10,27 @@
     <main id="main" >
       <!-- Upload element -->
       <h2>Upload your images here</h2>
-      <input v-model="title" name="title">
-        <input name="username">
+      <input v-model="title" name="title" placeholder="title">
+        <input v-model="username" name="username" placeholder="username">
+        <input v-model="desc" name="desc" placeholder="description">
         <input
             name="file"
             type="file"
             accept="image/*"
             @change="setFile"
-       id="input3" >
+       id="file"  class="inputfile" data-multiple-caption="{count} files selected" multiple  
+       >
+       <label for="file">Choose a file<span></span></label>
         <button v-on:click="upload">Submit</button>
           <!-- Images -->
       <div class="grid-element">
-          <div v-for="image in images">
-            <img :src="image.url" :alt="image.description"> 
+          <div v-if="images" v-for="image in images">
+            <img :key="image.id" :src="image.url" :alt="image.description"> 
             <h2>{{image.title}}</h2>
           </div>
         </div>
     </main>
     <script src="/js/app.js" type="module" crossorigin="use-credentials"></script>
+     <script src="/js/main.js" type="module" crossorigin="use-credentials"></script>
 </body>
 </html>
