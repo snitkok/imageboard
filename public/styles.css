@@ -1,10 +1,44 @@
 * {
-    background-color: bisque;
+    background-color: #fcde67;
+    color: #030e12;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
+}
+
+h1 {
+    text-align: center;
 }
 img {
-    width: 500px;
-    height: 400px;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border: solid 5px #5bccf6;
 }
-.container {
- 
+.grid-element {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 20px;
+    justify-items: center;
+    margin: 20px 0;
+}
+
+h2 {
+    margin: 5px;
+}
+
+input {
+    margin: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    background-color: #5bccf6;
+}
+
+#input3 {
+    background-color: #fcde67;
+}
+
+button {
+    background-color: #5bccf6;
+    border: none;
+    font-size: 18px;
 }
