@@ -62,4 +62,34 @@ app.post('/upload', uploader.single('file'), function(req, res) {
 });
 
 
-//Create "upload" folder
+{/* 
+export default{
+    data(){
+        return{
+            title:'',
+            desc: '',
+            username: ''
+    }
+        
+    },
+    props['id'],
+    mounted(){
+        fetch(`./image/${this.id}`).then(
+            res => res.json().then()
+        )
+    }
+}
+
+
+//closeevent @close="closemodal"
+
+
+
+
+
+
+
+
+
+*/}
+

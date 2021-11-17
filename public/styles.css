@@ -10,7 +10,6 @@ h1 {
 }
 img {
     object-fit: cover;
-    border: solid 5px #5bccf6;
     width: 30vw;
     height: 40vh;
 }
@@ -22,8 +21,11 @@ img {
     margin: 20px 0;
 }
 
-h2 {
-    margin: 5px;
+.framed h2 {
+    border-bottom: solid 5px #5bccf6;
+    border-bottom-style: inset;
+    border-left: solid 5px #5bccf6;
+    border-left-style: inset;
 }
 
 input {
@@ -33,6 +35,7 @@ input {
     background-color: #5bccf6;
 }
 
+/* styling button */
 #file {
     width: 0.1px;
     height: 0.1px;
@@ -58,11 +61,7 @@ input {
 .inputfile + label {
     cursor: pointer; /* "hand" cursor */
 }
-
-/* .inputfile:focus + label {
-    outline: 1px dotted #000;
-    outline: -webkit-focus-ring-color auto 5px;
-} */
+/*  */
 
 button {
     background-color: #5bccf6;
@@ -77,6 +76,41 @@ button:hover {
 span {
     padding: 10px;
 }
+/* modal */
+#modal {
+    width: 50vw;
+    height: 75vh;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1010;
+    background-color: #fcde67;
+}
+
+#modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+#modal h1,
+#modal div {
+    background-color: #fcde67;
+}
+
+#modal-overlay {
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #5bcdf6c2;
+}
+/* modal */
 
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
     .grid-element {

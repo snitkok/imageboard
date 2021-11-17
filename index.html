@@ -10,6 +10,8 @@
     <main id="main" >
       <!-- Upload element -->
       <h2>Upload your images here</h2>
+      <!-- SHORTHAND FOR V-BIND is ":" -->
+      <!-- ANOTHER Vue DIRECTIVES : V-MODULE for input fields,  V-ON to add event handlers(like mouse events)-->
       <input v-model="title" name="title" placeholder="title">
         <input v-model="username" name="username" placeholder="username">
         <input v-model="desc" name="desc" placeholder="description">
@@ -24,11 +26,14 @@
         <button v-on:click="upload">Submit</button>
           <!-- Images -->
       <div class="grid-element">
-          <div v-if="images" v-for="image in images">
-            <img :key="image.id" :src="image.url" :alt="image.description"> 
+          <div v-if="images" v-for="image in images" class="framed">
+            <img :key="image.id" :src="image.url" :alt="image.description" @click="openModal(image.id)"> 
             <h2>{{image.title}}</h2>
           </div>
         </div>
+        <!-- Component -->
+         <my-modal v-if="open" :id="selectedImageId" @close="closeModal"></my-modal>
+   <!-- Component -->
     </main>
     <script src="/js/app.js" type="module" crossorigin="use-credentials"></script>
      <script src="/js/main.js" type="module" crossorigin="use-credentials"></script>
