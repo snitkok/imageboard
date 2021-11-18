@@ -8,12 +8,13 @@ Vue.createApp({
         return {
             images: null,
             title: "",
-            desc: "",
+            description: "",
             username: "",
             file: null,
             open: false,
         };
     },
+    // The keys of the object you set as the value of the components property will be recognized as the tag names of your components.
     components: {
         "my-modal": modal,
     },
@@ -41,7 +42,7 @@ Vue.createApp({
             const formData = new FormData();
             formData.append("file", this.file);
             formData.append("title", this.title);
-            formData.append("desc", this.desc);
+            formData.append("description", this.description);
             formData.append("username", this.username);
             // sending the FormData instance in a POST request.
             fetch("/upload.json", {

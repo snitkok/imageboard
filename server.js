@@ -81,6 +81,32 @@ app.get("/images.json", (req, res) => {
         });
 });
 
+//-------------------------------------------
+app.get("/comments/:imageId", (req, res) => {
+    const { imageId } = req.params;
+    db.getComments(imageId)
+        .then((val) => {
+            res.json(val.rows);
+        })
+        .catch((err) => {
+            console.log("Error in /comments/:imageId", err);
+        });
+});
+
+// -------------------
+app.post("/comment", (req, res) => {
+    const { comment_text, username, image_id } = req.body;
+    console.log("req.body", req.body);
+    db.addComment(comment_text, username, image_id)
+        .then((val) => {
+            res.json(val.rows[0]);
+            console.log("object");
+        })
+        .catch((err) => {
+            console.log("Error in //comment.json", err);
+        });
+});
+
 ///must stay at the end
 app.get("*", (req, res) => {
     res.sendFile(`${__dirname}/index.html`);

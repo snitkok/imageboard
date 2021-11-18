@@ -38,3 +38,25 @@ module.exports.selectModalImage = (id) => {
     const params = [id];
     return db.query(q, params);
 };
+
+// get all comments for a particular image
+module.exports.getComments = (image_id) => {
+    const q = `
+    SELECT comment_text, username, created_at
+    FROM comments
+    WHERE image_id = $1
+    ORDER BY id DESC`;
+    const params = [image_id];
+    return db.query(q, params);
+};
+
+//add a comment for an image into the database
+module.exports.addComment = (comment_text, username, image_id) => {
+    const q = `
+    INSERT INTO comments 
+    (comment_text, username, image_id)
+    VALUES ($1, $2, $3) 
+    RETURNING *`;
+    const params = [comment_text, username, image_id];
+    return db.query(q, params);
+};

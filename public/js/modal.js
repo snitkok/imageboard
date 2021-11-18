@@ -1,25 +1,35 @@
+import comments from "./comments.js";
+
+// creating our modal component here
 export default {
     data() {
         return {
             modalImg: null,
             title: "",
-            desc: "",
+            description: "",
             username: "",
             url: "",
             date: "",
         };
     },
+    components: {
+        "my-comments": comments,
+    },
+
     props: ["id"],
+    // specifying a template for our component
     template: `
     <div id="modal">
     <div id="modal-content">
-   <img :src="modalImg" >
+    <img :src="modalImg" >
     <h1>{{title}}</h1> 
-    <div>{{desc}}</div>
+    <div>{{description}}</div>
     <div> Uploaded by {{username}} on {{date}} </div> 
     <button @click="click">Close</button>
     </div>
+       <my-comments :image-id="id"></my-comments> 
     </div>
+    
     <div id="modal-overlay" @click="click"></div>
     `,
     methods: {
@@ -34,7 +44,7 @@ export default {
             .then((data) => {
                 this.modalImg = data.url;
                 this.title = data.title;
-                this.desc = data.description;
+                this.description = data.description;
                 this.username = data.username;
                 let createdAt = data.created_at;
                 let createdAtFormatted = new Date(createdAt);
@@ -45,7 +55,7 @@ export default {
                     month: "long",
                 })}`;
 
-                console.log("images from server:", data);
+                console.log("image data:", data);
             });
     },
 };

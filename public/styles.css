@@ -86,6 +86,7 @@ span {
     transform: translate(-50%, -50%);
     z-index: 1010;
     background-color: #fcde67;
+    font-size: 20px;
 }
 
 #modal-content {
@@ -94,11 +95,6 @@ span {
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-}
-
-#modal h1,
-#modal div {
-    background-color: #fcde67;
 }
 
 #modal-overlay {
