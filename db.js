@@ -77,3 +77,7 @@ module.exports.moreImages = (id) => {
     const params = [id];
     return db.query(q, params);
 };
+
+
+///select image by id 
+

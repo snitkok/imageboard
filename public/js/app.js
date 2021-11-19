@@ -11,10 +11,10 @@ Vue.createApp({
             description: "",
             username: "",
             file: null,
-            open: false,
+            // open: false,
             loadmore: true,
-            //currentImageId: location.pathname.slice(1)
-            //open: location.pathname.slice(1) ///////
+            selectedImageId: location.pathname.slice(1),
+            open: location.pathname.slice(1), ///////
         };
     },
     // The keys of the object you set as the value of the components property will be recognized as the tag names of your components.
@@ -31,6 +31,13 @@ Vue.createApp({
                 console.log("images from server:", data);
                 this.images = data;
             });
+
+        addEventListener("popstate", (e) => {
+            console.log(location.pathname, e.state);
+            // show whatever is appropriate for the new url
+            // if you need it, e.state has the data you passed to `pushState`
+            this.selectedImageId = location.pathname.slice(1);
+        });
     },
     updated: function () {
         console.log("vue just updated");
@@ -59,21 +66,28 @@ Vue.createApp({
                 });
         },
 
-        closeModal() {
+        closeModal(done) {
             this.open = false;
             this.selectedImageId = undefined;
+            if (done) {
+                history.replaceState({}, "", "/");
+            } else {
+                history.pushState({}, "", "/");
+            }
         },
 
         openModal(imgId) {
             console.log("openmodal!!!!!!!!!!!", imgId);
-            this.open = true;
+            this.open = true; ///check this
             this.selectedImageId = imgId;
+            history.pushState({}, "", `/${this.selectedImageId}`);
         },
         load() {
             const lowestId = this.images[this.images.length - 1].id;
             fetch(`/moreimages/${lowestId}`)
                 .then((data) => data.json())
                 .then((data) => {
+                    console.log("data", data);
                     this.images.push(...data);
                     var newLowestId = data[0].lowestId;
                     const lowestId = this.images[this.images.length - 1].id;

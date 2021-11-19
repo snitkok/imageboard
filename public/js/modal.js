@@ -42,13 +42,15 @@ export default {
         fetch(`/modal/${this.id}`)
             .then((data) => data.json())
             .then((data) => {
+                if (data === null) {
+                    this.$emit("close", "done");
+                }
                 this.modalImg = data.url;
                 this.title = data.title;
                 this.description = data.description;
                 this.username = data.username;
                 let createdAt = data.created_at;
                 let createdAtFormatted = new Date(createdAt);
-
                 this.date = `${createdAtFormatted.toLocaleDateString("de-DE", {
                     year: "numeric",
                     day: "numeric",

@@ -61,10 +61,11 @@ app.get("/modal/:modalImage", (req, res) => {
     console.log("We are in the modal");
     db.selectModalImage(req.params.modalImage)
         .then((val) => {
-            res.json(val.rows[0]);
+            res.json(val.rows[0] || null);
         })
         .catch((err) => {
             console.log("Error in the / /modal/:modalImage", err);
+            res.json(null);
         });
 });
 
@@ -120,6 +121,8 @@ app.get("/moreimages/:imageId", (req, res) => {
             console.log("Error in /moreimages/:imageId", err);
         });
 });
+
+//-----------------------------------------------
 
 ///must stay at the end
 app.get("*", (req, res) => {
