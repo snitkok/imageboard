@@ -11,7 +11,8 @@ console.log("[db] Connecting to:", database);
 module.exports.selectImages = () => {
     const q = `SELECT *
     FROM images
-    ORDER BY images.id DESC;`;
+    ORDER BY images.id DESC
+     LIMIT 3;`;
     const params = [];
     return db.query(q, params);
 };
@@ -42,7 +43,7 @@ module.exports.selectModalImage = (id) => {
 // get all comments for a particular image
 module.exports.getComments = (image_id) => {
     const q = `
-    SELECT comment_text, username, created_at
+    SELECT comment_text, username, TO_CHAR(created_at, 'MM/DD/YYYY, HH12:MIPM') created_at
     FROM comments
     WHERE image_id = $1
     ORDER BY id DESC`;
@@ -58,5 +59,21 @@ module.exports.addComment = (comment_text, username, image_id) => {
     VALUES ($1, $2, $3) 
     RETURNING *`;
     const params = [comment_text, username, image_id];
+    return db.query(q, params);
+};
+
+//selecting lowest id and adding 3 next images per click
+
+module.exports.moreImages = (id) => {
+    const q = `
+  SELECT url, title, id, (
+  SELECT id FROM images
+  ORDER BY id ASC
+  LIMIT 1) AS "lowestId"
+  FROM images
+  WHERE id < $1
+  ORDER BY id DESC
+  LIMIT 3;`;
+    const params = [id];
     return db.query(q, params);
 };

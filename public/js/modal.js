@@ -26,8 +26,8 @@ export default {
     <div>{{description}}</div>
     <div> Uploaded by {{username}} on {{date}} </div> 
     <button @click="click">Close</button>
+        <my-comments :image-id="id"></my-comments> 
     </div>
-       <my-comments :image-id="id"></my-comments> 
     </div>
     
     <div id="modal-overlay" @click="click"></div>

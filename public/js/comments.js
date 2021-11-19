@@ -9,7 +9,7 @@ export default {
     },
     props: ["imageId"],
     template: `
-
+<div id="comments">
 <h3>Leave your comment here</h3>
 <input v-model="username" 
 name="username" placeholder="username">
@@ -18,8 +18,9 @@ name="username" placeholder="username">
 
 <div v-if="comments" v-for="comment in comments" class="framed">
 <h3>{{comment["comment_text"]}}</h3>
-<div>{{comment.username}} on {{comment.date}}</div>
+<div>{{comment.username}} on {{comment["created_at"]}}</div>
  </div>
+ <div>
     `,
     methods: {
         submit() {
@@ -49,9 +50,6 @@ name="username" placeholder="username">
             .then((data) => data.json())
             .then((data) => {
                 console.log("comments from server:", data);
-                // this.comment_text = data.comment_text;
-                // this.username = data.username;
-                // this.date = data.created_at;
 
                 this.comments = data;
             });

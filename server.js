@@ -107,6 +107,20 @@ app.post("/comment", (req, res) => {
         });
 });
 
+//-----------------------------------------------
+
+app.get("/moreimages/:imageId", (req, res) => {
+    const { imageId } = req.params;
+    console.log("req.body", req.body);
+    db.moreImages(imageId)
+        .then((val) => {
+            res.json(val.rows);
+        })
+        .catch((err) => {
+            console.log("Error in /moreimages/:imageId", err);
+        });
+});
+
 ///must stay at the end
 app.get("*", (req, res) => {
     res.sendFile(`${__dirname}/index.html`);

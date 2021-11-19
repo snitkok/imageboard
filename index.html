@@ -34,6 +34,8 @@
         <!-- Component -->
          <my-modal v-if="open" :id="selectedImageId" @close="closeModal"></my-modal>
    <!-- Component -->
+
+   <div><button v-if="loadmore" @click="load">MORE</button></div>
     </main>
     <script src="/js/app.js" type="module" crossorigin="use-credentials"></script>
      <script src="/js/main.js" type="module" crossorigin="use-credentials"></script>
