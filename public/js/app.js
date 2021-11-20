@@ -11,8 +11,10 @@ Vue.createApp({
             description: "",
             username: "",
             file: null,
-            // open: false,
             loadmore: true,
+            next: null,
+            previous: null,
+            id: null,
             selectedImageId: location.pathname.slice(1),
             open: location.pathname.slice(1), ///////
         };
@@ -96,6 +98,12 @@ Vue.createApp({
                     }
                     console.log("loadmore", this.loadmore);
                 });
+        },
+        previousImg(previous) {
+            this.selectedImageId = previous;
+        },
+        nextImg(next) {
+            this.selectedImageId = next;
         },
     },
 }).mount("#main");

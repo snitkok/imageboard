@@ -32,10 +32,25 @@ module.exports.uploadImages = (url, username, title, description) => {
 
 //Selecting all image information by id
 
+// module.exports.selectModalImage = (id) => {
+//     const q = `SELECT *
+//     FROM images
+//     WHERE id = $1`;
+//     const params = [id];
+//     return db.query(q, params);
+// };
+
+//
+//// Modified selectModalImage
 module.exports.selectModalImage = (id) => {
-    const q = `SELECT *
-    FROM images
+    const q = `SELECT *, 
+    (SELECT MIN(id) FROM images
+    WHERE id > $1) AS next, 
+    (SELECT MAX(id) FROM images
+    WHERE id < $1) AS previous 
+    FROM images 
     WHERE id = $1`;
+
     const params = [id];
     return db.query(q, params);
 };
@@ -77,7 +92,3 @@ module.exports.moreImages = (id) => {
     const params = [id];
     return db.query(q, params);
 };
-
-
-///select image by id 
-
